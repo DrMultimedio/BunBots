@@ -2,45 +2,104 @@
 #include "driverChoice.h"
 #include <stdio.h>
 #include <string>
+
+#include "GameObject.h"
 using namespace irr;
 using namespace core;
 using namespace scene;
 using namespace video;
 using namespace io;
 using namespace gui;
-class GameObject{
-	protected:
-
-	public:
-	 
-
-};
-class GameObjectOverWorld : GameObject{
-	//un gameobject de overworld es una especificación del gameobject para cuando estemos fuera de batalla, es decir, en el overworld 
-	protected:
-
-		std::string text; //un gameobject tiene en la mayoria de ocasiones un texto que aparecera en pantalla cuando interactuemos con el
-	public: 
-		GameObjectOverWorld(){
-			text = "";
-		}
-		std::string getText (){
-			return text;
-		}
-		void setText (std::string t){
-			text = t;
-		}
 
 
+class TextedGameObject : public GameObject {
+protected: 
+	std::string text = "";
 
-		void promptText(){
+	const std::string& getText_p() const { return text; }
+	void setText_p(std::string t){ text = std::move(t); }
+	void promptText(IGUIEnvironment* guienv){
 			//este metodo imprimira un texto con el formato del juego
 			//ahora mismo solo lo saca por consola, pero joer loco habremos de mejorarlo, no?
-			std::cout << text << "\n"; 
+
+			std::wstring widestr = std::wstring(text.begin(), text.end());
+
+			const wchar_t* widecstr = widestr.c_str();
+			
+			guienv->addStaticText(widecstr,
+			rect<s32>(10,10,300,50), true);
+
+		}
+public:
+	virtual ~TextedGameObject() = default;
+
+	virtual const std::string& getText() const = 0;
+	virtual const 		  void setText(const std::string& t) = 0;
+	virtual const 		  void promptText(IGUIEnvironment* guienv) const = 0;
+};
+
+class GameObjectOverWorld : public GameObject{
+	//un gameobject de overworld es una especificación del gameobject para cuando estemos fuera de batalla, es decir, en el overworld 
+	protected:
+		scene::ISceneNode* node = nullptr;
+	public: 
+		GameObjectOverWorld() {
 		}
 
+
+		core::vector3df getPosition(){
+			return node->getPosition();		
+		}
 };
-class NPC : public GameObjectOverWorld{
+class Player : public GameObjectOverWorld{
+	private: 
+		std::string name =""; 
+		float speed = 15.0f; 
+	public: 
+		Player() = default;
+		void addPlayerModel(ISceneManager* smgraux, IVideoDriver* driveraux){
+			node = smgraux->addCubeSceneNode(10.0f, 0, 0, core::vector3df(35.0f, 0.0f, 0.0f), core::vector3df(0, 0, 0), core::vector3df(1.0f, 1.0f, 1.0f));
+			if (node)
+			{
+				//node->setPosition(core::vector3df(0,0,30));
+				node->setMaterialTexture(0, driveraux->getTexture("Materials/madero.jpg"));
+				node->setMaterialFlag(video::EMF_LIGHTING, false);
+			}
+
+		}
+		void move (char axis, int direction, float frameDeltaTime){
+			//esta funcion permitira moverse al usuario. Pedimos el eje de movimiento, la direccion y el deltatime
+			if(direction > 0){
+				direction = 1;
+			}
+			else if (direction < 0) {
+				direction = -1;
+			}
+			else{
+				direction = 0;
+			}
+			core::vector3df nodePosition = node->getPosition();
+			switch (axis){
+				case 'X':
+					nodePosition.X += speed * direction * frameDeltaTime;
+					break;
+				case 'Y':
+					nodePosition.Y += speed * direction * frameDeltaTime;
+					break;
+				case 'Z':
+					nodePosition.Z += speed * direction * frameDeltaTime;
+					break;
+
+			}
+			node->setPosition(nodePosition);
+
+		}
+
+
+
+
+};
+class NPC : public GameObjectOverWorld, TextedGameObject {
 	private:
 	
 		std::string name;
@@ -54,7 +113,15 @@ class NPC : public GameObjectOverWorld{
 			name = n; 
 			text = t;
 		}
-
+		void modelNPC(ISceneManager* smgraux, IVideoDriver* driveraux){
+			scene::ISceneNode * node = smgraux->addCubeSceneNode(10.0f, 0, 0, core::vector3df(15.0f, 0.0f, 45.0f), core::vector3df(0, 0, 0), core::vector3df(1.0f, 1.0f, 1.0f));
+			if (node)
+			{
+				//node->setPosition(core::vector3df(0,0,30));
+				node->setMaterialTexture(0, driveraux->getTexture("Materials/ielo.jpg"));
+				node->setMaterialFlag(video::EMF_LIGHTING, false);
+			}
+		}
 
 		std::string getName (){
 			return name;
@@ -62,6 +129,10 @@ class NPC : public GameObjectOverWorld{
 		void setName(std::string n){
 			name = n;
 		}
+
+		const std::string& getText() const override { return getText_p(); };
+		const 		  void setText(const std::string& t) override { setText_p(t); };
+		const 		  void promptText(IGUIEnvironment* guienv) const override { promptText(guienv); };
 
 	};
 
@@ -97,8 +168,8 @@ class MyEventReceiver : public IEventReceiver{
 };
 int main(){
 
-	NPC enepece("Paco", "Soy un enepece");
-
+	NPC enepece("Paco", "Soy un ielico");
+	Player jugador = Player();
 	printf("HELLO WORLD CON TOMATICO \n");
 	// ask user for driver
 	video::E_DRIVER_TYPE driverType=driverChoiceConsole();
@@ -123,19 +194,14 @@ int main(){
 		floor->setMaterialTexture(0, driver->getTexture("Materials/cespe.jpg"));
 		floor->setMaterialFlag(video::EMF_LIGHTING, false);
 	}
-	scene::ISceneNode * node = smgr->addCubeSceneNode(10.0f, 0, 0, core::vector3df(0, 0, 0), core::vector3df(0, 0, 0), core::vector3df(1.0f, 1.0f, 1.0f));
-	if (node)
-	{
-		node->setPosition(core::vector3df(0,0,30));
-		node->setMaterialTexture(0, driver->getTexture("Materials/madero.jpg"));
-		node->setMaterialFlag(video::EMF_LIGHTING, false);
-	}
+
 	/*
 	To be able to look we create a camera looking at 0, 30, -40 from 0,5,0.
 	*/
 	smgr->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
-
-
+	
+	enepece.modelNPC(smgr, driver);
+	jugador.addPlayerModel(smgr, driver);
 
 	/*
 	We have done everything, so lets draw it. We also write the current
@@ -160,30 +226,19 @@ int main(){
 
 		/* Check if keys W, S, A or D are being held down, and move the
 		sphere node around respectively. */
-		core::vector3df nodePosition = node->getPosition();
-
-
 
 
 		if(receiver.IsKeyDown(irr::KEY_KEY_W))
-			nodePosition.Z += MOVEMENT_SPEED * frameDeltaTime;
+			jugador.move('Z', 1,  frameDeltaTime);
 		else if(receiver.IsKeyDown(irr::KEY_KEY_S))
-			nodePosition.Z -= MOVEMENT_SPEED * frameDeltaTime;
+			jugador.move('Z', -1,  frameDeltaTime);
 
 		else if(receiver.IsKeyDown(irr::KEY_KEY_A))
-			nodePosition.X -= MOVEMENT_SPEED * frameDeltaTime;
+			jugador.move('X', -1,  frameDeltaTime);
 		else if(receiver.IsKeyDown(irr::KEY_KEY_D))
-			nodePosition.X += MOVEMENT_SPEED * frameDeltaTime;
-		else if(receiver.IsKeyDown(irr::KEY_KEY_P))
-			std::cout << "X: " << nodePosition.X << "Z: " << nodePosition.Z << " \n";
+			jugador.move('X', +1,  frameDeltaTime);
 		else if(receiver.IsKeyDown(irr::KEY_KEY_Z))
-			enepece.promptText();
-
-
-
-
-
-		node->setPosition(nodePosition);
+			enepece.promptText(guienv);
 
 
 
