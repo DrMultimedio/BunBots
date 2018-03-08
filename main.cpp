@@ -1,7 +1,7 @@
 #include <irrlicht.h>
 #include "driverChoice.h"
 #include <stdio.h>
-#include <string>
+#include <string.h>
 
 #include "GameObject.h"
 using namespace irr;
@@ -21,11 +21,16 @@ protected:
 	void promptText(IGUIEnvironment* guienv){
 			//este metodo imprimira un texto con el formato del juego
 			//ahora mismo solo lo saca por consola, pero joer loco habremos de mejorarlo, no?
-
+			std::cout << 1;
+			
 			std::wstring widestr = std::wstring(text.begin(), text.end());
+			
+			std::cout << 2;
 
 			const wchar_t* widecstr = widestr.c_str();
 			
+			std::cout << 3;
+
 			guienv->addStaticText(widecstr,
 			rect<s32>(10,10,300,50), true);
 
@@ -33,7 +38,7 @@ protected:
 public:
 	virtual ~TextedGameObject() = default;
 
-	virtual const std::string& getText() const = 0;
+	virtual const std::string& getText() const = 0; //metodo const para no cambiar nada de la clase
 	virtual const 		  void setText(const std::string& t) = 0;
 	virtual const 		  void promptText(IGUIEnvironment* guienv) const = 0;
 };
@@ -81,12 +86,15 @@ class Player : public GameObjectOverWorld{
 			core::vector3df nodePosition = node->getPosition();
 			switch (axis){
 				case 'X':
+				
 					nodePosition.X += speed * direction * frameDeltaTime;
 					break;
 				case 'Y':
 					nodePosition.Y += speed * direction * frameDeltaTime;
 					break;
 				case 'Z':
+					
+
 					nodePosition.Z += speed * direction * frameDeltaTime;
 					break;
 
@@ -238,6 +246,7 @@ int main(){
 		else if(receiver.IsKeyDown(irr::KEY_KEY_D))
 			jugador.move('X', +1,  frameDeltaTime);
 		else if(receiver.IsKeyDown(irr::KEY_KEY_Z))
+		
 			enepece.promptText(guienv);
 
 
