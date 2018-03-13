@@ -1,12 +1,12 @@
 #include "TextedGameObject.h"
 
 
-void promptText(gui::IGUIEnvironment* guienv){
+void TextedGameObject::promptText(gui::IGUIEnvironment* guienv){
         //este metodo imprimira un texto con el formato del juego
         //ahora mismo solo lo saca por consola, pero joer loco habremos de mejorarlo, no?
         std::cout << 1;
         
-        std::wstring widestr = std::wstring(TextedGameObject::text.begin(), TextedGameObject::text.end());
+        std::wstring widestr = std::wstring(text.begin(), text.end());
         
         std::cout << 2;
 

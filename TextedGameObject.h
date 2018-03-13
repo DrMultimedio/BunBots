@@ -14,7 +14,7 @@ protected:
 
 		const std::string& getText_p() const { return text; }
 		void setText_p(std::string t){ text = std::move(t); }
-		void promptText(gui::IGUIEnvironment* guienv){}
+		void promptText(gui::IGUIEnvironment* guienv);
 
 public: 
 	virtual const std::string& getText() const = 0; //metodo const para no cambiar nada de la clase

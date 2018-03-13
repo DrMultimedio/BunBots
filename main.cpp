@@ -15,53 +15,16 @@ using namespace gui;
 #include "GameObjectOverworld.h"
 
 #include "Player.h"
-#include "Player.cpp"
+//#include "Player.cpp"
 
-// #include "World.h"
-// #include "Prop.h"
-// #include "Teleport.h"
+#include "World.h"
+//#include "Prop.h"
+#include "Teleport.h"
 
-/*
+
 #include "NPC.h"
-#include "NPC.cpp"
-*/
 
-class NPC : public GameObjectOverWorld, TextedGameObject {
-	private:
-	
-		std::string name;
 
-	public: 
-
-		NPC (){
-			name = ""; 
-		}
-		NPC (std::string n, std::string t){
-			name = n; 
-			text = t;
-		}
-		void modelNPC(ISceneManager* smgraux, IVideoDriver* driveraux){
-			scene::ISceneNode * node = smgraux->addCubeSceneNode(10.0f, 0, 0, core::vector3df(15.0f, 0.0f, 45.0f), core::vector3df(0, 0, 0), core::vector3df(1.0f, 1.0f, 1.0f));
-			if (node)
-			{
-				//node->setPosition(core::vector3df(0,0,30));
-				node->setMaterialTexture(0, driveraux->getTexture("Materials/ielo.jpg"));
-				node->setMaterialFlag(video::EMF_LIGHTING, false);
-			}
-		}
-
-		std::string getName (){
-			return name;
-		}
-		void setName(std::string n){
-			name = n;
-		}
-
-		const std::string& getText() const override { return getText_p(); };
-		const 		  void setText(const std::string& t) override { setText_p(t); };
-		const 		  void promptText(IGUIEnvironment* guienv) const override { promptText(guienv); };
-
-};
 
 class MyEventReceiver : public IEventReceiver{
 
