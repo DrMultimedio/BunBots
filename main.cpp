@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "GameObject.h"
 using namespace irr;
 using namespace core;
 using namespace scene;
@@ -11,102 +10,22 @@ using namespace video;
 using namespace io;
 using namespace gui;
 
+#include "GameObject.h"
+#include "TextedGameObject.h"
+#include "GameObjectOverworld.h"
 
-class TextedGameObject : public GameObject {
-protected: 
-	std::string text = "";
+#include "Player.h"
+#include "Player.cpp"
 
-	const std::string& getText_p() const { return text; }
-	void setText_p(std::string t){ text = std::move(t); }
-	void promptText(IGUIEnvironment* guienv){
-			//este metodo imprimira un texto con el formato del juego
-			//ahora mismo solo lo saca por consola, pero joer loco habremos de mejorarlo, no?
-			std::cout << 1;
-			
-			std::wstring widestr = std::wstring(text.begin(), text.end());
-			
-			std::cout << 2;
+// #include "World.h"
+// #include "Prop.h"
+// #include "Teleport.h"
 
-			const wchar_t* widecstr = widestr.c_str();
-			
-			std::cout << 3;
+/*
+#include "NPC.h"
+#include "NPC.cpp"
+*/
 
-			guienv->addStaticText(widecstr,
-			rect<s32>(10,10,300,50), true);
-
-		}
-public:
-	virtual ~TextedGameObject() = default;
-
-	virtual const std::string& getText() const = 0; //metodo const para no cambiar nada de la clase
-	virtual const 		  void setText(const std::string& t) = 0;
-	virtual const 		  void promptText(IGUIEnvironment* guienv) const = 0;
-};
-
-class GameObjectOverWorld : public GameObject{
-	//un gameobject de overworld es una especificación del gameobject para cuando estemos fuera de batalla, es decir, en el overworld 
-	protected:
-		scene::ISceneNode* node = nullptr;
-	public: 
-		GameObjectOverWorld() {
-		}
-
-
-		core::vector3df getPosition(){
-			return node->getPosition();		
-		}
-};
-class Player : public GameObjectOverWorld{
-	private: 
-		std::string name =""; 
-		float speed = 15.0f; 
-	public: 
-		Player() = default;
-		void addPlayerModel(ISceneManager* smgraux, IVideoDriver* driveraux){
-			node = smgraux->addCubeSceneNode(10.0f, 0, 0, core::vector3df(35.0f, 0.0f, 0.0f), core::vector3df(0, 0, 0), core::vector3df(1.0f, 1.0f, 1.0f));
-			if (node)
-			{
-				//node->setPosition(core::vector3df(0,0,30));
-				node->setMaterialTexture(0, driveraux->getTexture("Materials/madero.jpg"));
-				node->setMaterialFlag(video::EMF_LIGHTING, false);
-			}
-
-		}
-		void move (char axis, int direction, float frameDeltaTime){
-			//esta funcion permitira moverse al usuario. Pedimos el eje de movimiento, la direccion y el deltatime
-			if(direction > 0){
-				direction = 1;
-			}
-			else if (direction < 0) {
-				direction = -1;
-			}
-			else{
-				direction = 0;
-			}
-			core::vector3df nodePosition = node->getPosition();
-			switch (axis){
-				case 'X':
-				
-					nodePosition.X += speed * direction * frameDeltaTime;
-					break;
-				case 'Y':
-					nodePosition.Y += speed * direction * frameDeltaTime;
-					break;
-				case 'Z':
-					
-
-					nodePosition.Z += speed * direction * frameDeltaTime;
-					break;
-
-			}
-			node->setPosition(nodePosition);
-
-		}
-
-
-
-
-};
 class NPC : public GameObjectOverWorld, TextedGameObject {
 	private:
 	
@@ -142,7 +61,7 @@ class NPC : public GameObjectOverWorld, TextedGameObject {
 		const 		  void setText(const std::string& t) override { setText_p(t); };
 		const 		  void promptText(IGUIEnvironment* guienv) const override { promptText(guienv); };
 
-	};
+};
 
 class MyEventReceiver : public IEventReceiver{
 
@@ -174,16 +93,26 @@ class MyEventReceiver : public IEventReceiver{
 			// We use this array to store the current state of each key
 			bool KeyIsDown[KEY_KEY_CODES_COUNT];
 };
+
+
+
+
+
+
 int main(){
 
 	NPC enepece("Paco", "Soy un ielico");
 	Player jugador = Player();
 	printf("HELLO WORLD CON TOMATICO \n");
+
+
 	// ask user for driver
+
 	video::E_DRIVER_TYPE driverType=driverChoiceConsole();
 	if (driverType==video::EDT_COUNT)
 		return 1;
 	MyEventReceiver receiver;
+
 
 	//createDevice( deviceType, WindowSize, bits, FullScreen, StencilBuffer, Vsync, Eventreciver)
 	IrrlichtDevice* device = createDevice(driverType,
