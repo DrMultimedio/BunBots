@@ -2,7 +2,8 @@
 	#define __PLAYER_H__
 
 	#include <irrlicht.h>
-	#include <stdio.h>
+	#include <string>
+
 	#include "GameObject.h"
 	#include "GameObjectOverworld.h"
 

@@ -14,14 +14,14 @@ class NPC : public GameObjectOverWorld, public TextedGameObject {
     public:
         NPC();
         NPC (std::string n, std::string t);
-		void modelNPC(scene::ISceneManager* smgraux, video::IVideoDriver* driveraux);
+		void modelNPC(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver* driveraux);
 
 		std::string getName() {return name;}
 		void setName(std::string n){name = n;}
 
 		const std::string& getText() const override { return getText_p(); };
 		const 		  void setText(const std::string& t) override { setText_p(t); };
-		const 		  void promptText(IGUIEnvironment* guienv) const override { promptText(guienv); };
+		const 		  void promptText(irr::gui::IGUIEnvironment* guienv) const override { promptText(guienv); };
 
 
 

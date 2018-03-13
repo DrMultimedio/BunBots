@@ -12,9 +12,9 @@ class Prop : public GameObjectOverWorld, public TextedGameObject {
 	private:
 		std::string name;
     public:
-        NPC();
-        NPC (std::string n, std::string t);
-		void modelNPC(scene::ISceneManager* smgraux, video::IVideoDriver* driveraux);
+        Prop();
+        Prop (std::string n, std::string t);
+		void modelProp(scene::ISceneManager* smgraux, video::IVideoDriver* driveraux);
 
 		std::string getName() {return name;}
 		void setName(std::string n){name = n;}

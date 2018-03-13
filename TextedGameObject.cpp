@@ -1,7 +1,7 @@
 #include "TextedGameObject.h"
+#include <iostream>
 
-
-void TextedGameObject::promptText(gui::IGUIEnvironment* guienv){
+void TextedGameObject::promptText(irr::gui::IGUIEnvironment* guienv){
         //este metodo imprimira un texto con el formato del juego
         //ahora mismo solo lo saca por consola, pero joer loco habremos de mejorarlo, no?
         std::cout << 1;
@@ -15,6 +15,6 @@ void TextedGameObject::promptText(gui::IGUIEnvironment* guienv){
         std::cout << 3;
 
         guienv->addStaticText(widecstr,
-        rect<s32>(10,10,300,50), true);
+        irr::core::rect<irr::s32>(10,10,300,50), true);
 
     }
