@@ -2,11 +2,10 @@
 #define __NPC_H__
 
 #include <irrlicht.h>
-#include <stdio.h>
 #include "GameObject.h"
 #include "GameObjectOverworld.h"
 #include "TextedGameObject.h"
-#include "TextedGameObject.cpp"
+
 
 class NPC : public GameObjectOverWorld, public TextedGameObject {
 	private:
@@ -21,7 +20,7 @@ class NPC : public GameObjectOverWorld, public TextedGameObject {
 
 		const std::string& getText() const override { return getText_p(); };
 		const 		  void setText(const std::string& t) override { setText_p(t); };
-		const 		  void promptText(irr::gui::IGUIEnvironment* guienv) const override { promptText(guienv); };
+	    const 		  void promptText(irr::gui::IGUIEnvironment* guienv) const override { promptText_p(guienv); };
 
 
 

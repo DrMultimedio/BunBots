@@ -6,22 +6,25 @@
 #include "GameObject.h"
 #include "GameObjectOverworld.h"
 #include "TextedGameObject.h"
-#include "TextedGameObject.cpp"
 
 class Prop : public GameObjectOverWorld, public TextedGameObject {
 	private:
 		std::string name;
-    public:
+    
+	public:
         Prop();
         Prop (std::string n, std::string t);
-		void modelProp(scene::ISceneManager* smgraux, video::IVideoDriver* driveraux);
+
+		void addModelProp(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver* driveraux);
+		void addModelProp(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver* driveraux, irr::core::vector3df position);
 
 		std::string getName() {return name;}
 		void setName(std::string n){name = n;}
 
 		const std::string& getText() const override { return getText_p(); };
 		const 		  void setText(const std::string& t) override { setText_p(t); };
-		const 		  void promptText(IGUIEnvironment* guienv) const override { promptText(guienv); };
+		const 		  void promptText(irr::gui::IGUIEnvironment* guienv) const override { promptText_p(guienv); };
+		
 
 
 

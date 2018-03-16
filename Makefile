@@ -1,11 +1,16 @@
 SOURCES := $(wildcard *.cpp)
 OBJECTS := $(subst .cpp,.o,$(SOURCES))
+CPPFLAGS := -g
+TARGET := ejecutable
 
-ejecutable: $(OBJECTS)
-	g++ -o $@ $^ -I/usr/include/irrlicht -l Irrlicht
+$(TARGET): $(OBJECTS)
+	g++ -o $@ $^ -I/usr/include/irrlicht -l Irrlicht $(CPPFLAGS)
 	
 %.o: %.cpp
-	g++ -o $@ -c $^ -I/usr/include/irrlicht -l Irrlicht
+	g++ -o $@ -c $^ -I/usr/include/irrlicht -l Irrlicht $(CPPFLAGS)
+
+clean:
+	rm $(OBJECTS) $(TARGET)
 
 info: 
 	$(info $(SOURCES))

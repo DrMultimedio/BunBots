@@ -4,23 +4,30 @@
 
 
 #include <irrlicht.h>
-#include <stdio.h>
+#include <vector>
 #include "GameObject.h"
 #include "GameObjectOverworld.h"
 #include "Teleport.h"
 
-//#include "NPC.h"
-//#include "Prop.h"
+#include "NPC.h"
+#include "Prop.h"
+
 
 class World :public GameObjectOverWorld{
         protected:
                 //la clase world tendra un array de NPCs, Props, y Teleports
-                //NPC npcs[3] ;
-                //Prop props[3] ;
-                Teleport teleports[3];
+                std::vector <NPC> npcs ;
+                std::vector <Prop> props ;
+                std::vector <Teleport> teleports;
+                irr::core::vector3df newPlayerPosition; //posicion del jugador al entrar al mundo
         public: 
-                void loadWorld(); //cargara el mundo
+                World();
 
+                void loadWorld(); //cargara el mundo
+                int  addNPC(NPC n); //anyadir NPC, devuelve 1 si todo correcto
+                int  addProp(Prop p); //anyadir prop, devuelve 1 si todo correcto
+                int  addTeleport(Teleport t); //anyadir tp, devuelve 1 si todo correcto
+                int  createNPC(String name, String Text, int shape);
 
 
 };

@@ -64,6 +64,7 @@ class MyEventReceiver : public IEventReceiver{
 
 int main(){
 
+
 	NPC enepece("Paco", "Soy un ielico");
 	Player jugador = Player();
 	printf("HELLO WORLD CON TOMATICO \n");

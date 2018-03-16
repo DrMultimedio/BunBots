@@ -2,7 +2,6 @@
 #define __TELEPORT_H__
 
 #include <irrlicht.h>
-#include <stdio.h>
 #include "GameObject.h"
 #include "GameObjectOverworld.h"
 
@@ -15,7 +14,7 @@ class Teleport : public GameObjectOverWorld{
     //a otros mapas, entre otros. 
 	private:
         World* worldToTp = nullptr; //el mundo al que llevara el tp
-        core::vector3df newPlayerPosition; //posicion del jugador despues de haber sido teleportado
+        irr::core::vector3df newPlayerPosition; //posicion del jugador despues de haber sido teleportado
         //Prop door;
     public:
         Teleport() = default;
