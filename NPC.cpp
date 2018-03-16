@@ -2,7 +2,7 @@
 
 NPC::NPC (std::string n, std::string t){
     name = n; 
-    text = t;
+    this->setText(t);
 }
 void NPC::modelNPC(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver* driveraux){
     node = smgraux->addCubeSceneNode(10.0f, 0, 0, irr::core::vector3df(15.0f, 0.0f, 45.0f), irr::core::vector3df(0, 0, 0), irr::core::vector3df(1.0f, 1.0f, 1.0f));

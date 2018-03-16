@@ -18,7 +18,7 @@ class NPC : public GameObjectOverWorld, public TextedGameObject {
 		std::string getName() {return name;}
 		void setName(std::string n){name = n;}
 
-		const std::string& getText() const override { return getText_p(); };
+		const std::vector<std::string>& getText() const override { return getText_p(); };
 		const 		  void setText(const std::string& t) override { setText_p(t); };
 	    const 		  void promptText(irr::gui::IGUIEnvironment* guienv) const override { promptText_p(guienv); };
 

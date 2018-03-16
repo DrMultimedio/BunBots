@@ -27,7 +27,7 @@ class World :public GameObjectOverWorld{
                 int  addNPC(NPC n); //anyadir NPC, devuelve 1 si todo correcto
                 int  addProp(Prop p); //anyadir prop, devuelve 1 si todo correcto
                 int  addTeleport(Teleport t); //anyadir tp, devuelve 1 si todo correcto
-                int  createNPC(String name, String Text, int shape);
+                int  createNPC(std::string name, std::string Text, int shape);
 
 
 };
