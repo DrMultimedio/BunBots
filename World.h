@@ -26,12 +26,12 @@ class World :public GameObjectOverWorld{
                 World();
 
                 void loadWorld(); //cargara el mundo
-                int  addNPC(NPC* n); //anyadir NPC, devuelve la posicion si todo correcto
-                int  addProp(Prop* p); //anyadir prop, devuelve la posicion si todo correcto
-                int  addTeleport(Teleport* t); //anyadir tp, devuelve la posicion si todo correcto
-                int  addPlayer(Player* j);  //anyadir tp, devuelve la posicion si todo correcto
-                int  createNPC(std::string name, std::string Text, int shape);
-                void CheckTextPrompt();
+                void  addNPC(NPC* n); //anyadir NPC, devuelve la posicion si todo correcto
+                void  addProp(Prop* p); //anyadir prop, devuelve la posicion si todo correcto
+                void  addTeleport(Teleport* t); //anyadir tp, devuelve la posicion si todo correcto
+                void  addPlayer(Player* j);  //anyadir tp, devuelve la posicion si todo correcto
+                void  createNPC(std::string name, std::string Text, int shape);
+                void CheckTextPrompt(irr::gui::IGUIEnvironment* guienv);
 
 };
 

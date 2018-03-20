@@ -17,13 +17,15 @@ void TextedGameObject::promptText_p(irr::gui::IGUIEnvironment* guienv) const{
         //while quede texto sin mostrar 
         //(texto = t, t tiene l lineas, cada vez que pulse el boton y aparezca una linea nueva aumentara i. Cuando i sea mayor que z se sale del bucle)
         //esperar boton
-        
+        for(int i = 0; i < text.size() ; i++){
+            std::cout << text[i];
+        }
 
 
 }
 
 //void TextedGameObject::setText_p(std::string t) const{ //quito el const por la funcion push_back, que como no es const pues no va
-void TextedGameObject::setText_p(std::string t) const{
+void TextedGameObject::setText_p(std::string t){
 
     //este metodo separara el string t por \n para que se pueda leer bien y haya un texto fluido
     //primero esto y luego lo otro
@@ -32,7 +34,7 @@ void TextedGameObject::setText_p(std::string t) const{
     std::string token;
     while (std::getline(iss, token, '\n'))
     {
-        //text.push_back(token);
+        text.push_back(token);
         std::cout << token << std::endl;
     }
 

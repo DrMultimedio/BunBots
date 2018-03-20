@@ -78,7 +78,6 @@ int main(){
 	printf("HELLO WORLD CON TOMATICO \n");
 
 
-	enepeceh.setPosition(0.0, 0.0, -30.0);
 	// ask user for driver
 
 	video::E_DRIVER_TYPE driverType=driverChoiceConsole();
@@ -111,6 +110,9 @@ int main(){
 	smgr->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
 	
 	enepece.modelNPC(smgr, driver);
+	enepeceh.modelNPC(smgr, driver);
+	enepeceh.setPosition(0.0, 0.0, -30.0);
+
 	jugador.addPlayerModel(smgr, driver);
 
 	/*
@@ -150,7 +152,7 @@ int main(){
 		else if(receiver.IsKeyDown(irr::KEY_KEY_Z))
 		{
 			std::cout << "pulsado z o algo \n";
-			world.CheckTextPrompt();
+			world.CheckTextPrompt(guienv);
 			
 			//enepece.talk(jugador.getPosition());
 			//enepece.promptText(guienv);

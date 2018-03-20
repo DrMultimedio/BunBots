@@ -17,15 +17,15 @@ protected:
 
 	//	void setText_p(std::string t){ text = std::move(t); }
 
-		void setText_p(std::string t) const;
+		void setText_p(std::string t);
 		void promptText_p(irr::gui::IGUIEnvironment* guienv) const;
 
 public: 
 	virtual const std::vector<std::string>& getText() const = 0; //metodo const para no cambiar nada de la clase
-	virtual const 		  void setText(const std::string& t) = 0;
+	virtual void setText(const std::string& t) = 0;
 
 	//virtual 		  void setText(const std::string& t) = 0;
-	virtual const 		  void promptText(irr::gui::IGUIEnvironment* guienv) const = 0;
+	virtual void promptText(irr::gui::IGUIEnvironment* guienv) const = 0;
     
 
 };

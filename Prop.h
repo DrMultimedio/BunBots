@@ -22,8 +22,8 @@ class Prop : public GameObjectOverWorld, public TextedGameObject {
 		void setName(std::string n){name = n;}
 
 		const std::vector<std::string>& getText() const override { return getText_p(); };
-		const 		  void setText(const std::string& t) override { setText_p(t); };
-		const 		  void promptText(irr::gui::IGUIEnvironment* guienv) const override { promptText_p(guienv); };
+		void setText(const std::string& t) override { setText_p(t); };
+		void promptText(irr::gui::IGUIEnvironment* guienv) const override { promptText_p(guienv); };
 		
 
 
