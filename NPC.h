@@ -13,11 +13,15 @@ class NPC : public GameObjectOverWorld, public TextedGameObject {
     public:
         NPC();
         NPC (std::string n, std::string t);
+		
 		void modelNPC(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver* driveraux);
+		void talk(irr::core::vector3df playerPos);
 
 		std::string getName() {return name;}
-		void setName(std::string n){name = n;}
 
+		void setName(std::string n){name = n;}
+		irr::core::vector3df getPosition(){return node->getPosition();};
+		void setPosition(int x, int y, int z);
 		const std::vector<std::string>& getText() const override { return getText_p(); };
 		const 		  void setText(const std::string& t) override { setText_p(t); };
 	    const 		  void promptText(irr::gui::IGUIEnvironment* guienv) const override { promptText_p(guienv); };

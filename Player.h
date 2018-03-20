@@ -23,5 +23,6 @@
 			Player() = default;
 			void addPlayerModel(ISceneManager* smgraux, IVideoDriver* driveraux);
 			void move (char axis, int direction, float frameDeltaTime);
+			core::vector3df getPosition(){return node->getPosition();};
 	};
 	#endif

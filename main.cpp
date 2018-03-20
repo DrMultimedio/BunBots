@@ -64,12 +64,21 @@ class MyEventReceiver : public IEventReceiver{
 
 int main(){
 
+	World world;
 
-	NPC enepece("Paco", "Soy un ielico");
+	NPC enepece("Paco", "Soy un ielico \n Del planeta de los ielicos");
+	NPC enepeceh("Heterito", "Soy un ielico \n Del planeta de los ielicos");
+
 	Player jugador = Player();
+
+	world.addNPC(&enepece);
+	world.addNPC(&enepeceh);
+
+	world.addPlayer(&jugador);
 	printf("HELLO WORLD CON TOMATICO \n");
 
 
+	enepeceh.setPosition(0.0, 0.0, -30.0);
 	// ask user for driver
 
 	video::E_DRIVER_TYPE driverType=driverChoiceConsole();
@@ -83,7 +92,7 @@ int main(){
 			core::dimension2d<u32>(640, 480), 16, false, false, false, &receiver);
 	if(!device) return -1;
 
-	device->setWindowCaption(L"Hola mundillo");
+	device->setWindowCaption(L"BunBots, el videojuego");
 
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
@@ -139,9 +148,13 @@ int main(){
 		else if(receiver.IsKeyDown(irr::KEY_KEY_D))
 			jugador.move('X', +1,  frameDeltaTime);
 		else if(receiver.IsKeyDown(irr::KEY_KEY_Z))
-		
-			enepece.promptText(guienv);
-
+		{
+			std::cout << "pulsado z o algo \n";
+			world.CheckTextPrompt();
+			
+			//enepece.talk(jugador.getPosition());
+			//enepece.promptText(guienv);
+		}
 
 
 

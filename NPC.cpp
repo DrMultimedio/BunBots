@@ -1,4 +1,5 @@
 #include "NPC.h"
+#include <iostream>
 
 NPC::NPC (std::string n, std::string t){
     name = n; 
@@ -12,4 +13,13 @@ void NPC::modelNPC(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver*
         node->setMaterialTexture(0, driveraux->getTexture("Materials/ielo.jpg"));
         node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     }
+}
+void NPC::talk(irr::core::vector3df playerPos){
+    irr::core::vector3df npcPos = this->node->getPosition();
+    if(abs(playerPos.X - npcPos.X) < 20){
+        std::cout << "Soy un "<< name <<" \n";
+    }
+}
+void NPC::setPosition(int x, int y, int z){
+    //node->setPosition(irr::core::vector3df(x,y,z)); //esta linea da segmentation fault, ni ide de por que
 }
