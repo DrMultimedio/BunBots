@@ -64,18 +64,7 @@ class MyEventReceiver : public IEventReceiver{
 
 int main(){
 
-	World world;
 
-	NPC enepece("Paco", "Soy un ielico \n Del planeta de los ielicos");
-	NPC enepeceh("Heterito", "Soy un ielico \n Del planeta de los ielicos");
-
-	Player jugador = Player();
-
-	world.addNPC(&enepece);
-	world.addNPC(&enepeceh);
-
-	world.addPlayer(&jugador);
-	printf("HELLO WORLD CON TOMATICO \n");
 
 
 	// ask user for driver
@@ -96,6 +85,22 @@ int main(){
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
+
+//definimos objectos
+
+	World world(guienv);
+
+	NPC enepece("Paco", "Soy un ielico \n Del planeta de los ielicos");
+	NPC enepeceh("Heterito", "Soy otro ielico \n Del planeta de los ielicos");
+
+	Player jugador = Player();
+
+	world.addNPC(&enepece);
+	world.addNPC(&enepeceh);
+
+	world.addPlayer(&jugador);
+	printf("HELLO WORLD CON TOMATICO \n");
+
 
 	scene::ISceneNode * floor = smgr->addCubeSceneNode(600.0f, 0, 0, core::vector3df(0, -4.0f, 0), core::vector3df(0, 0, 0), core::vector3df(1.0f, 0.000166f, 1.0f));
 	if (floor)
@@ -152,7 +157,7 @@ int main(){
 		else if(receiver.IsKeyDown(irr::KEY_KEY_Z))
 		{
 			std::cout << "pulsado z o algo \n";
-			world.CheckTextPrompt(guienv);
+			world.CheckTextPrompt();
 			
 			//enepece.talk(jugador.getPosition());
 			//enepece.promptText(guienv);

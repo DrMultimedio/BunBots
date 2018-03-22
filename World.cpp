@@ -4,8 +4,8 @@
  #include "World.h"
 
 //constructor por defecto
-World::World(){
-    //el constructor por defecto pone un plano en el suelo
+World::World(irr::gui::IGUIEnvironment* guienv){
+    gui = MyGUI(guienv);
     
 }
 
@@ -29,13 +29,13 @@ void World::addPlayer(Player* j){
 
 }
 
-void World::CheckTextPrompt(irr::gui::IGUIEnvironment* guienv){
+void World::CheckTextPrompt(){
     for(int i = 0; i < npcs.size() ; i++){
 
-        std::cout << "Hola \n" <<  "\n";
 
-        if(abs(player->getPosition().X - npcs.at(i)->getPosition().X) < 20){
-            npcs.at(i)->talk(guienv); //Cambiar at(i) por [i]
+        if(abs(player->getPosition().X - npcs.at(i)->getPosition().X)< 20 && abs(player->getPosition().Y - npcs.at(i)->getPosition().Y) < 20 ) {
+            //npcs[i]->talk(guienv); //Cambiar at(i) por [i]
+            gui.promptText(npcs[i]);
     }
 
 

@@ -2,5 +2,6 @@
 Ahora mismo lo que voy a hacer es que todos los npcs se den por aludidos, haga una comprobación de proximidad (y proximante de 
 direccion)
 
-Ahora mismo hay problemas con prompt text, textedgameobjects y eso
+//solventado Ahora mismo hay problemas con prompt text, textedgameobjects y eso 
 Hay que arreglar prompttext para que pare el juego, y puedas avanzar el texto usando z
+Preguntar sobre que World tenga un puntero a GUI
