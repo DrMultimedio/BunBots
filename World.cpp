@@ -4,9 +4,10 @@
  #include "World.h"
 
 //constructor por defecto
-World::World(irr::gui::IGUIEnvironment* guienv){
-    gui = MyGUI(guienv);
+World::World(irr::gui::IGUIEnvironment* guienv, MyEventReceiver* r){
     
+    gui = MyGUI(guienv,r );
+    receiver = r; 
 }
 
 

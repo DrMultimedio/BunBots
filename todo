@@ -3,5 +3,7 @@ Ahora mismo lo que voy a hacer es que todos los npcs se den por aludidos, haga u
 direccion)
 
 //solventado Ahora mismo hay problemas con prompt text, textedgameobjects y eso 
-Hay que arreglar prompttext para que pare el juego, y puedas avanzar el texto usando z
-Preguntar sobre que World tenga un puntero a GUI
+Hay que arreglar prompttext para que pare el juego, y puedas avanzar el texto usando z 
+    -Ahora mismo para el juego, y entra en un bucle. Falta programar que salga al pulsar z
+Preguntar sobre que World tenga un puntero a GUI y otro a Receiver
+¿Es world mi escena? 

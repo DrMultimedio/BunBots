@@ -14,6 +14,8 @@
 #include "Prop.h"
 #include "MyGUI.h"
 
+#include "MyEventReceiver.h"
+
 class World :public GameObjectOverWorld{
 protected:
         //la clase world tendra un array de NPCs, Props, y Teleports
@@ -23,9 +25,10 @@ protected:
         std::vector <Teleport*> teleports;
         Player* player;
         irr::core::vector3df newPlayerPosition; //posicion del jugador al entrar al mundo
-        MyGUI gui = NULL;;
+        MyGUI gui; //preguntar sobre esto, si deberia ser un puntero o contener el objeto
+        MyEventReceiver* receiver;
 public: 
-        World(irr::gui::IGUIEnvironment* guienv);
+        World(irr::gui::IGUIEnvironment* guienv,  MyEventReceiver* r);
 
         void loadWorld(); //cargara el mundo
         void  addNPC(NPC* n); //anyadir NPC, devuelve la posicion si todo correcto
