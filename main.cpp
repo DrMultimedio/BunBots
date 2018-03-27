@@ -51,7 +51,7 @@ int main(){
 
 //definimos objectos
 
-	World world(guienv, &receiver);
+	World world(guienv, &receiver, device);
 
 	NPC enepece("Paco", "Soy un ielico \n Del planeta de los ielicos");
 	NPC enepeceh("Heterito", "Soy otro ielico \n Del planeta de los ielicos");
@@ -92,39 +92,18 @@ int main(){
 
 	// In order to do framerate independent movement, we have to know
 	// how long it was since the last frame
-	u32 then = device->getTimer()->getTime();
 
 	// This is the movemen speed in units per second.
 	const f32 MOVEMENT_SPEED = 10.0f;
 
 	while(device->run())
 	{
-		// Work out a frame delta time.
-		const u32 now = device->getTimer()->getTime();
-		const f32 frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
-		then = now;
 
 		/* Check if keys W, S, A or D are being held down, and move the
 		sphere node around respectively. */
 
+		world.Update();
 
-		if(receiver.IsKeyDown(irr::KEY_KEY_W))
-			jugador.move('Z', 1,  frameDeltaTime);
-		else if(receiver.IsKeyDown(irr::KEY_KEY_S))
-			jugador.move('Z', -1,  frameDeltaTime);
-
-		else if(receiver.IsKeyDown(irr::KEY_KEY_A))
-			jugador.move('X', -1,  frameDeltaTime);
-		else if(receiver.IsKeyDown(irr::KEY_KEY_D))
-			jugador.move('X', +1,  frameDeltaTime);
-		else if(receiver.IsKeyDown(irr::KEY_KEY_Z))
-		{
-			std::cout << "pulsado z o algo \n";
-			world.CheckTextPrompt();
-			
-			//enepece.talk(jugador.getPosition());
-			//enepece.promptText(guienv);
-		}
 
 
 

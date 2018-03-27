@@ -8,17 +8,17 @@
 #include <string>
 #include "GameObject.h"
 #include "NPC.h"
-#include "MyEventReceiver.h"
 
 class MyGUI {
 
     protected: 
         irr::gui::IGUIEnvironment* guienv;
-        MyEventReceiver* receiver;
+
+        irr::gui::IGUIStaticText* textBox;
     public:
-        MyGUI(irr::gui::IGUIEnvironment* gui,  MyEventReceiver* r);
-        MyGUI() = default;
-        void promptText(NPC* n) const;
+        MyGUI(irr::gui::IGUIEnvironment* gui);
+        MyGUI() = delete;
+        void promptText(std::string text) const;
 
 
 };

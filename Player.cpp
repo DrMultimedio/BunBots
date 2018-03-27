@@ -10,6 +10,7 @@ void Player::addPlayerModel(ISceneManager* smgraux, IVideoDriver* driveraux){
         this->node->setMaterialFlag(video::EMF_LIGHTING, false);
     }
 
+
 }
 void Player::move (char axis, int direction, float frameDeltaTime){
     //esta funcion permitira moverse al usuario. Pedimos el eje de movimiento, la direccion y el deltatime
