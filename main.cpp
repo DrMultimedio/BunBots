@@ -32,29 +32,35 @@ int main(){
 
 	// ask user for driver
 
+
+	//initdrivers
 	video::E_DRIVER_TYPE driverType=driverChoiceConsole();
 	if (driverType==video::EDT_COUNT)
 		return 1;
 	MyEventReceiver receiver;
+	//fin de initdrivers
 
-
+	//createDevice()
 	//createDevice( deviceType, WindowSize, bits, FullScreen, StencilBuffer, Vsync, Eventreciver)
 	IrrlichtDevice* device = createDevice(driverType,
-			core::dimension2d<u32>(640, 480), 16, false, false, false, &receiver);
+			core::dimension2d<u32>(800, 600), 16, false, false, false, &receiver);
 	if(!device) return -1;
 
 	device->setWindowCaption(L"BunBots, el videojuego");
+	//fin de createDevice() //si retorna -1 nos vamos
 
+	//constructor de game
 	IVideoDriver* driver = device->getVideoDriver();
 	ISceneManager* smgr = device->getSceneManager();
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
+
 
 //definimos objectos
 
 	World world(guienv, &receiver, device);
 
-	NPC enepece("Paco", "Soy un ielico \n Del planeta de los ielicos");
-	NPC enepeceh("Heterito", "Soy otro ielico \n Del planeta de los ielicos");
+	NPC enepece("Paco", "Soy un ielico \n Del planeta de los ielicos \n");
+	NPC enepeceh("Heterito", "Soy otro ielico \n Del planeta de los ielicos \n");
 
 	Player jugador = Player();
 
@@ -83,6 +89,9 @@ int main(){
 
 	jugador.addPlayerModel(smgr, driver);
 
+
+	//fin de constructor de game
+
 	/*
 	We have done everything, so lets draw it. We also write the current
 	frames per second and the name of the driver to the caption of the
@@ -95,7 +104,7 @@ int main(){
 
 	// This is the movemen speed in units per second.
 	const f32 MOVEMENT_SPEED = 10.0f;
-
+	//el loop (dis is goin to be a pain in the ass)
 	while(device->run())
 	{
 

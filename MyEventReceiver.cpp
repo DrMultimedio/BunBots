@@ -4,9 +4,10 @@
 bool MyEventReceiver::OnEvent(const irr::SEvent& event)
 {
     // Remember whether each key is down or up
-    if (event.EventType == irr::EET_KEY_INPUT_EVENT)
+    if (event.EventType == irr::EET_KEY_INPUT_EVENT){
+        KeyWasDown[event.KeyInput.Key] = KeyIsDown[event.KeyInput.Key];
         KeyIsDown[event.KeyInput.Key] = event.KeyInput.PressedDown;
-
+    }
     return false;
 }
 
@@ -16,10 +17,27 @@ bool MyEventReceiver::IsKeyDown(irr::EKEY_CODE keyCode) const
     return KeyIsDown[keyCode];
 }
 
+bool MyEventReceiver::IsKeyPressed(irr::EKEY_CODE keyCode) const
+{
+    if(!KeyWasDown[keyCode] && KeyIsDown[keyCode]){
+
+        return true;
+    }
+    else{
+        return false;
+    }
+
+}
+
+
+
 MyEventReceiver::MyEventReceiver()
 {
-    for (int i=0; i<irr::KEY_KEY_CODES_COUNT; ++i)
+    for (int i=0; i<irr::KEY_KEY_CODES_COUNT; ++i){
+    
         KeyIsDown[i] = false;
+        KeyWasDown[i] = false;
+    }
 }
 
 

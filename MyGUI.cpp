@@ -4,7 +4,7 @@
 #include<string>
 MyGUI::MyGUI(irr::gui::IGUIEnvironment* gui){
     guienv = gui;
-    textBox = guienv->addStaticText(L"", irr::core::rect<irr::s32>(10,10,300,50), true);
+    textBox = guienv->addStaticText(L"", irr::core::rect<irr::s32>(10,500,790,590), true, true, 0, -1,true);
 
 }
 
