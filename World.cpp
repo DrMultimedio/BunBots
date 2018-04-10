@@ -16,6 +16,10 @@ World::World(irr::gui::IGUIEnvironment* guienv, MyEventReceiver* r, irr::Irrlich
 }
 World::~World(){
     delete gui;
+    for(int i = 0; i<npcs.size(); i++){
+        delete npcs[i];
+    }
+    delete player;
 }
 
 void World::addNPC(NPC* n){
