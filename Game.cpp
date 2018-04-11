@@ -48,7 +48,7 @@ Game::Game()
 	To be able to look we create a camera looking at 0, 30, -40 from 0,5,0.
     Creamos una camara
 	*/
-	smgr->addCameraSceneNode(0, vector3df(0,30,-40), vector3df(0,5,0));
+	smgr->addCameraSceneNode(0, vector3df(0,200,-20), vector3df(0,5,0));
 	
     //agregamos modelo a los npcs
 	enepece->modelNPC(smgr, driver);
