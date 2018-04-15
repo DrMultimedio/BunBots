@@ -11,10 +11,9 @@
 #include "GameObjectOverworld.h"
 #include "Player.h"
 #include "World.h"
-#include "Teleport.h"
+#include "Bola.h"
 
 
-#include "NPC.h"
 
 class Game {
     protected:

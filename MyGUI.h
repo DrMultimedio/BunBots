@@ -7,7 +7,6 @@
 #include <vector> 
 #include <string>
 #include "GameObject.h"
-#include "NPC.h"
 
 class MyGUI {
 

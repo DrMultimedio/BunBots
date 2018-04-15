@@ -25,13 +25,8 @@ Game::Game()
 
 	world = new World(guienv, receiver, device);
 
-	NPC* enepece = new NPC("Paco", "Soy un ielico \n Del planeta de los ielicos \n");
-	NPC* enepeceh = new NPC("Juanito", "Soy otro ielico \n Del planeta de los ielicos \n");
-
 	Player* jugador = new Player();
-
-	world->addNPC(enepece);
-	world->addNPC(enepeceh);
+	jugador->addPlayerModel(smgr, driver);
 
 	world->addPlayer(jugador);
 	printf("HELLO WORLD CON TOMATICO \n");
@@ -48,16 +43,22 @@ Game::Game()
 	To be able to look we create a camera looking at 0, 30, -40 from 0,5,0.
     Creamos una camara
 	*/
-	smgr->addCameraSceneNode(0, vector3df(0,200,-20), vector3df(0,5,0));
+	smgr->addCameraSceneNode(0, vector3df(0,150,-20), vector3df(0,0,0));
 	
-    //agregamos modelo a los npcs
-	enepece->modelNPC(smgr, driver);
-	enepeceh->modelNPC(smgr, driver);
-	enepeceh->setPosition(0.0, 0.0, -30.0);
 
     //agregamos modelo a jugador
-	jugador->addPlayerModel(smgr, driver);
+	for(int i = 0; i < 13 ; i++){
+		for(int j = 0; j < 4; j++){
+			irr::core::vector3df pos((i*22.0f+15)-150, 0.0f, 80.0f - j*22.0f);
+			Ladrillo* ladrillo = new Ladrillo();
+			ladrillo->addModelLadrillo(smgr, driver, pos);
+			world->addLadrillo(ladrillo);
+		}
 
+	}
+	Bola* bola = new Bola();
+	bola->addModelBola(smgr, driver);
+	world->addBola(bola);
 
 }
 

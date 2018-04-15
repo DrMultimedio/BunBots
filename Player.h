@@ -18,11 +18,11 @@
 		protected: 
 			
 			std::string name =""; 
-			float speed = 15.0f; 
+			float speed = 100.0f; 
 		public:
 			Player() = default;
 			void addPlayerModel(ISceneManager* smgraux, IVideoDriver* driveraux);
 			void move (char axis, int direction, float frameDeltaTime);
 			core::vector3df getPosition(){return node->getPosition();};
-	};
+	};		
 	#endif

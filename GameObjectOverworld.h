@@ -17,6 +17,7 @@
 		
 			GameObjectOverWorld() {}
 			irr::core::vector3df getPosition(){return node->getPosition();}
+			irr::scene::ISceneNode* getNode(){return node;};
 
 	};
 

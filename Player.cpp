@@ -1,7 +1,7 @@
 #include "Player.h"
 
 void Player::addPlayerModel(ISceneManager* smgraux, IVideoDriver* driveraux){
-    this->node = smgraux->addCubeSceneNode(10.0f, 0, 0, core::vector3df(15.0f, 0.0f, 45.0f), core::vector3df(0, 0, 0), core::vector3df(1.0f, 1.0f, 1.0f));
+    this->node = smgraux->addCubeSceneNode(10.0f, 0, 0, core::vector3df(0.0f, 0.0f, -85.0f), core::vector3df(0, 0, 0), core::vector3df(5.0f, 1.0f, 1.0f));
     
     if (node)
     {
