@@ -47,13 +47,16 @@ Game::Game()
 	
 
     //agregamos modelo a jugador
-	for(int i = 0; i < 13 ; i++){
-		for(int j = 0; j < 4; j++){
-			irr::core::vector3df pos((i*22.0f+15)-150, 0.0f, 80.0f - j*22.0f);
-			Ladrillo* ladrillo = new Ladrillo();
-			ladrillo->addModelLadrillo(smgr, driver, pos);
-			world->addLadrillo(ladrillo);
-		}
+	int initialOffset = 40;
+	bricks = 55;
+	for(int i = 0; i < bricks ; i++){
+		int row = i/rowQuantity; 
+		int offset = i%rowQuantity;
+		irr::core::vector3df pos((offset*22.0f+initialOffset)-150, 0.0f, 80.0f - row * 22 );
+		Ladrillo* ladrillo = new Ladrillo();
+		ladrillo->addModelLadrillo(smgr, driver, pos);
+		world->addLadrillo(ladrillo);
+		
 
 	}
 	Bola* bola = new Bola();
@@ -65,6 +68,7 @@ Game::Game()
 void Game::loop(){
 	while(device->run())
 	{
+		//TODO: Pintar las vidas
         Game::update();
 
 		driver->beginScene(true, true, SColor(255,200,101,100));
@@ -74,14 +78,15 @@ void Game::loop(){
 		driver->endScene();
 
     }
-
 }
-
-
 void Game::update(){
-
-		world->Update();
-
+		if(!world->getLoss()){
+			world->Update();
+		}
+		else{
+			std::cout<<"YOU LOST \n";
+			//TODO: Poner aqui como una pantalla en verde que ponga "Press Z to restart" 
+		}
 }
 
 

@@ -20,14 +20,14 @@ class Game {
 	    const f32 MOVEMENT_SPEED = 10.0f;
         World* world = nullptr;
         //FightMode* fightmode;
-        enum modes {WORLD, FIGHTMODE}; 
-        enum modes currentMode = WORLD;
-
+        int bricks = 30;
+        int rowQuantity = 11; 
         IrrlichtDevice* device;
         IVideoDriver* driver;
 	    ISceneManager* smgr;
 	    IGUIEnvironment* guienv;
         MyEventReceiver* reciever; 
+        int lifes = 3;
     public: 
         Game();
         void swap();

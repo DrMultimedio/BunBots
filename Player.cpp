@@ -5,6 +5,7 @@ void Player::addPlayerModel(ISceneManager* smgraux, IVideoDriver* driveraux){
     
     if (node)
     {
+        node->setDebugDataVisible( true);
 
         this->node->setMaterialTexture(0, driveraux->getTexture("Materials/madero.jpg"));
         this->node->setMaterialFlag(video::EMF_LIGHTING, false);

@@ -2,9 +2,10 @@
 
 
 void Bola::addModelBola(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver* driveraux){
-    node = smgraux->addSphereSceneNode(5.0f, 16, 0, 0, irr::core::vector3df(0.0f, 0.0f, -50.0f), irr::core::vector3df(0, 0, 0), irr::core::vector3df(1.0f, 1.0f, 1.0f));
+    node = smgraux->addSphereSceneNode(5.0f, 16, 0, -1, irr::core::vector3df(0.0f, 0.0f, -50.0f), irr::core::vector3df(0, 0, 0), irr::core::vector3df(1.0f, 1.0f, 1.0f));
     if (node)
     {
+        node->setDebugDataVisible( true);
         //node->setPosition(irr::core::vector3df(0,0,30));
         pos.X = 0.0f;
         pos.Y = 0.0f;
@@ -24,13 +25,32 @@ void Bola::update(){
         speed.X = -speed.X;
         acceleration.X = -acceleration.X;
     }
-    if (abs(pos.Z) > 100.0f){
+    if (pos.Z > 100.0f){
         speed.Z = -speed.Z;
         acceleration.Z = -acceleration.Z; //sin esta linea hace un efecto gravitatorio :3
-
     }
-
+    if (pos.Z < -100.0f){
+        restart();
+    }
     this->node->setPosition(pos);
+
+}
+void Bola::restart(){
+    if(lifes>0){
+        pos.X = 0.0f;
+        pos.Y = 0.0f;
+        pos.Z = -50.0f;
+        lifes--;
+        std::cout<<"Quedan " << lifes <<" vidas \n";
+        
+    }
+    else{
+        loss = true;
+    }
+}
+void Bola::crash(){
+    speed.Z = -speed.Z;
+    acceleration.Z = -acceleration.Z; //sin esta linea hace un efecto gravitatorio :3
 
 }
 Bola::Bola(){
@@ -39,4 +59,7 @@ Bola::Bola(){
     acceleration.X = 0.001f;
     acceleration.Y = 0.001f;
 
+}
+bool Bola::getLoss(){
+    return loss; 
 }

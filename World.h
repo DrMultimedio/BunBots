@@ -28,7 +28,7 @@ protected:
         //variables de texto 
         bool textMode = false; 
         int actualLine;
-
+        bool loss = false;
         //variables tiempo
         u32 now;
         u32 then;
@@ -43,7 +43,7 @@ public:
         void addLadrillo(Ladrillo* p); //anyadir prop, devuelve la posicion si todo correcto
         void addPlayer(Player* j);  //anyadir tp, devuelve la posicion si todo correcto
         void Update();
-
+        bool getLoss();
         ~World();
 
 };

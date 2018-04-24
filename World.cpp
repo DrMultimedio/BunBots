@@ -42,18 +42,36 @@ void World::Update(){
     frameDeltaTime = (f32)(now - then) / 1000.f; // Time in seconds
     then = now;
 	//check collissions
-	if( bola->getNode()->getBoundingBox().intersectsWithBox(player->getNode()->getBoundingBox()) )
+	if( bola->getNode()->getTransformedBoundingBox().intersectsWithBox(player->getNode()->getTransformedBoundingBox()) )
 	{
+		bola->crash();
 		std::cout<< "COLISION";
 	// collision detected
 	}
+	int ladrilloBorrar = -1;
+	//checkeo colisiones con ladrillos
+	for(int i = 0; i < ladrillos.size() ; i++){
+		if( bola->getNode()->getTransformedBoundingBox().intersectsWithBox(ladrillos[i]->getNode()->getTransformedBoundingBox()) )
+		{
+			bola->crash();
+			ladrilloBorrar = i;
+		// collision detected
+		}
+	}
+	if(ladrilloBorrar != -1){
+		ladrillos[ladrilloBorrar]->getNode()->remove();
+
+		ladrillos.erase(ladrillos.begin() + ladrilloBorrar);
+		ladrilloBorrar = -1;
+	}
+
         //te mueves
 		
-		if(receiver->IsKeyDown(irr::KEY_KEY_W))
+		/*if(receiver->IsKeyDown(irr::KEY_KEY_W))
 			player->move('Z', 1,  frameDeltaTime);
 		else if(receiver->IsKeyDown(irr::KEY_KEY_S))
 			player->move('Z', -1,  frameDeltaTime);
-
+		*/
 		else if(receiver->IsKeyDown(irr::KEY_KEY_A))
 			player->move('X', -1,  frameDeltaTime);
 		else if(receiver->IsKeyDown(irr::KEY_KEY_D))
@@ -66,4 +84,7 @@ void World::Update(){
 		}
 	bola->update();
     
+}
+bool World::getLoss(){
+	return bola->getLoss();
 }
