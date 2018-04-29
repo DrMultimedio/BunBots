@@ -18,7 +18,7 @@ class Bola : public GameObjectOverWorld {
 	public:
         Bola();
         Bola (std::string n, std::string t);
-
+		int getVidas(); 
 		void addModelBola(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver* driveraux);
 		void addModelBola(irr::scene::ISceneManager* smgraux, irr::video::IVideoDriver* driveraux, irr::core::vector3df position);
 		void update();

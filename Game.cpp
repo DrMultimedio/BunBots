@@ -5,7 +5,7 @@ Game::Game()
 	// ask user for driver
 	video::E_DRIVER_TYPE driverType=driverChoiceConsole();
     //definimos receiver 
-    MyEventReceiver* receiver = new MyEventReceiver;    
+    receiver = new MyEventReceiver;    
 
 
     //inicializamos el dispositivo
@@ -64,7 +64,37 @@ Game::Game()
 	world->addBola(bola);
 
 }
+void Game::restart(){
+	delete world;
+	delete smgr;
+    smgr = device->getSceneManager();
+	world = new World(guienv, receiver, device);
+	Player* jugador = new Player();
+	jugador->addPlayerModel(smgr, driver);
+	scene::ISceneNode * floor = smgr->addCubeSceneNode(600.0f, 0, 0, core::vector3df(0, -4.0f, 0), core::vector3df(0, 0, 0), core::vector3df(1.0f, 0.000166f, 1.0f));
+	if (floor)
+	{
+		floor->setMaterialTexture(0, driver->getTexture("Materials/cespe.jpg"));
+		floor->setMaterialFlag(video::EMF_LIGHTING, false);
+	}
+	smgr->addCameraSceneNode(0, vector3df(0,150,-20), vector3df(0,0,0));
+    //agregamos modelo a jugador
+	int initialOffset = 40;
+	bricks = 55;
+	for(int i = 0; i < bricks ; i++){
+		int row = i/rowQuantity; 
+		int offset = i%rowQuantity;
+		irr::core::vector3df pos((offset*22.0f+initialOffset)-150, 0.0f, 80.0f - row * 22 );
+		Ladrillo* ladrillo = new Ladrillo();
+		ladrillo->addModelLadrillo(smgr, driver, pos);
+		world->addLadrillo(ladrillo);
+		
 
+	}
+	Bola* bola = new Bola();
+	bola->addModelBola(smgr, driver);
+	world->addBola(bola);
+}
 void Game::loop(){
 	while(device->run())
 	{
@@ -85,6 +115,7 @@ void Game::update(){
 		}
 		else{
 			std::cout<<"YOU LOST \n";
+
 			//TODO: Poner aqui como una pantalla en verde que ponga "Press Z to restart" 
 		}
 }
@@ -109,5 +140,5 @@ void Game::drop(){
 }
 Game::~Game(){
 	delete world;
-	delete reciever;
+	delete receiver;
 }

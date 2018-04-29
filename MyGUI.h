@@ -16,6 +16,8 @@ class MyGUI {
         irr::gui::IGUIStaticText* textBox;
     public:
         MyGUI(irr::gui::IGUIEnvironment* gui);
+        MyGUI(irr::gui::IGUIEnvironment* gui, int a, int b, int c, int d );
+
         MyGUI() = delete;
         void promptText(std::string text) const;
 

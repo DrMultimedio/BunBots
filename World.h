@@ -20,14 +20,11 @@ protected:
         std::vector <Ladrillo*> ladrillos ;
         Player* player;
         Bola* bola;
-        irr::core::vector3df newPlayerPosition; //posicion del jugador al entrar al mundo
-        MyGUI* gui; //preguntar sobre esto, si deberia ser un puntero o contener el objeto
+        MyGUI* gui; 
         MyEventReceiver* receiver;
         irr::IrrlichtDevice* device;
 
         //variables de texto 
-        bool textMode = false; 
-        int actualLine;
         bool loss = false;
         //variables tiempo
         u32 now;
@@ -37,7 +34,6 @@ protected:
         f32 MOVEMENT_SPEED = 10.0f;
 public: 
         World(irr::gui::IGUIEnvironment* guienv,  MyEventReceiver* r, irr::IrrlichtDevice* d);
-
         void loadWorld(); //cargara el mundo
         void addBola(Bola* p); //anyadir prop, devuelve la posicion si todo correcto
         void addLadrillo(Ladrillo* p); //anyadir prop, devuelve la posicion si todo correcto

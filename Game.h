@@ -26,7 +26,7 @@ class Game {
         IVideoDriver* driver;
 	    ISceneManager* smgr;
 	    IGUIEnvironment* guienv;
-        MyEventReceiver* reciever; 
+        MyEventReceiver* receiver; 
         int lifes = 3;
     public: 
         Game();
@@ -35,6 +35,7 @@ class Game {
         void update();
         void loop();
         void drop();
+        void restart();
         ~Game();
 };
 

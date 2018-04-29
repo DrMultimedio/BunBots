@@ -63,3 +63,6 @@ Bola::Bola(){
 bool Bola::getLoss(){
     return loss; 
 }
+int Bola::getVidas(){
+    return lifes; 
+}

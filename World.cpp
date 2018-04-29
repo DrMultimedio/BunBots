@@ -83,7 +83,8 @@ void World::Update(){
 			//enepece.promptText(guienv);
 		}
 	bola->update();
-    
+    int vidas = bola->getVidas();
+	gui->promptText(std::to_string(vidas));
 }
 bool World::getLoss(){
 	return bola->getLoss();
