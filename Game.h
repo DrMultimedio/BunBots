@@ -12,6 +12,7 @@
 #include "Player.h"
 #include "World.h"
 #include "Bola.h"
+#include "GUIimg.h"
 
 
 
@@ -27,6 +28,9 @@ class Game {
 	    ISceneManager* smgr;
 	    IGUIEnvironment* guienv;
         MyEventReceiver* receiver; 
+        GUIimg* lostText;
+        GUIimg* textoVidas;
+        bool started = false;
         int lifes = 3;
     public: 
         Game();

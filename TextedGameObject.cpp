@@ -4,7 +4,7 @@
 
 void TextedGameObject::promptText_p(irr::gui::IGUIEnvironment* guienv) const{
 
-    std::cout << "Este metodo  se mantiene por compatibilidad, cuando MyGUI sea totalmente funcional lo borrare \n";
+    std::cout << "Este metodo  se mantiene por compatibilidad, cuando GUIText sea totalmente funcional lo borrare \n";
 
 
 

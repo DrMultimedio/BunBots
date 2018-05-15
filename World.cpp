@@ -7,16 +7,15 @@
 //constructor por defecto
 World::World(irr::gui::IGUIEnvironment* guienv, MyEventReceiver* r, irr::IrrlichtDevice* d){
     
-    gui = new MyGUI(guienv );
     receiver = r; 
     device = d;
     then = device->getTimer()->getTime();
 
 }
 World::~World(){
-    delete gui;
     delete player;
 	for(int i = 0; i<ladrillos.size(); i++){
+		ladrillos[i]->getNode()->remove();
 		delete ladrillos[i];
 	}
 	delete bola;
@@ -79,13 +78,15 @@ void World::Update(){
 		else if(receiver->IsKeyPressed(irr::KEY_KEY_Z))
 		{
 			std::cout << "pulsado z o algo \n";			
-			//enepece.talk(jugador.getPosition());
-			//enepece.promptText(guienv);
 		}
 	bola->update();
-    int vidas = bola->getVidas();
-	gui->promptText(std::to_string(vidas));
+}
+int World::getVidas(){
+	return bola->getVidas();
 }
 bool World::getLoss(){
 	return bola->getLoss();
+}
+void World::restart(){
+	bola->restart();
 }

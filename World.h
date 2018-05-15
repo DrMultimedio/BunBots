@@ -10,7 +10,7 @@
 #include "Player.h"
 #include "Bola.h"
 #include "Ladrillo.h"
-#include "MyGUI.h"
+#include "GUIText.h"
 
 #include "MyEventReceiver.h"
 
@@ -20,7 +20,7 @@ protected:
         std::vector <Ladrillo*> ladrillos ;
         Player* player;
         Bola* bola;
-        MyGUI* gui; 
+        GUIText* gui; 
         MyEventReceiver* receiver;
         irr::IrrlichtDevice* device;
 
@@ -40,6 +40,8 @@ public:
         void addPlayer(Player* j);  //anyadir tp, devuelve la posicion si todo correcto
         void Update();
         bool getLoss();
+        int getVidas();
+        void restart();
         ~World();
 
 };
