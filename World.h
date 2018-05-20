@@ -40,6 +40,8 @@ public:
         void addPlayer(Player* j);  //anyadir tp, devuelve la posicion si todo correcto
         void Update();
         bool getLoss();
+        bool getWin();
+        void faster();
         int getVidas();
         void restart();
         ~World();

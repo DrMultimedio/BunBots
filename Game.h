@@ -21,7 +21,7 @@ class Game {
 	    const f32 MOVEMENT_SPEED = 10.0f;
         World* world = nullptr;
         //FightMode* fightmode;
-        int bricks = 30;
+        int bricks = 25;
         int rowQuantity = 11; 
         IrrlichtDevice* device;
         IVideoDriver* driver;

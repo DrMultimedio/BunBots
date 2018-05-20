@@ -25,6 +25,7 @@ class Bola : public GameObjectOverWorld {
 		void crash();
 		bool getLoss();
 		void restart();
+		void faster();
 };
 
 #endif

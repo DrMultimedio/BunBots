@@ -13,12 +13,15 @@ World::World(irr::gui::IGUIEnvironment* guienv, MyEventReceiver* r, irr::Irrlich
 
 }
 World::~World(){
+	player->getNode()->remove();
     delete player;
 	for(int i = 0; i<ladrillos.size(); i++){
 		ladrillos[i]->getNode()->remove();
 		delete ladrillos[i];
 	}
+	bola->getNode()->remove();
 	delete bola;
+
 }
 
 void World::addLadrillo(Ladrillo* p){
@@ -84,8 +87,16 @@ void World::Update(){
 int World::getVidas(){
 	return bola->getVidas();
 }
+void World::faster(){
+	bola->faster();
+}
 bool World::getLoss(){
 	return bola->getLoss();
+}
+bool World::getWin(){
+	if(ladrillos.size() == 0)
+		return true;
+	return false;
 }
 void World::restart(){
 	bola->restart();

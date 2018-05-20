@@ -27,8 +27,13 @@ void Player::move (char axis, int direction, float frameDeltaTime){
     core::vector3df nodePosition = this->node->getPosition();
     switch (axis){
         case 'X':
-        
+            if(nodePosition.X<-200){
+                direction = 1;
+            }
+            else if(nodePosition.X>950)
+                direction = -1;
             nodePosition.X += this->speed * direction * frameDeltaTime;
+
             break;
         case 'Y':
             nodePosition.Y += this->speed * direction * frameDeltaTime;

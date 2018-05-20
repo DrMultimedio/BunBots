@@ -2,14 +2,13 @@
 #include "driverChoice.h"
 Game::Game()
 {
+
 	// ask user for driver
     //definimos receiver 
     receiver = new MyEventReceiver;    
     //inicializamos el dispositivo
 	this->device = createDevice(video::EDT_OPENGL,
-        core::dimension2d<u32>(800, 600), 16, false, false, false, receiver);
-    
-    
+	core::dimension2d<u32>(800, 600), 16, false, false, false, receiver);
     device->setWindowCaption(L"BunBots, el videojuego");
 
     //definimos driver, escenas y gui 
@@ -20,7 +19,7 @@ Game::Game()
 
     //agregamos objetos
     textoVidas = new GUIimg(guienv, driver, "Materials/3.png");
-	lostText = new GUIimg(guienv,driver, 20 , 20 , 800, 600, "Materials/3.png");
+	lostText = new GUIimg(guienv,driver, 0 , 0 , 800, 600);
 	world = new World(guienv, receiver, device);
 
 	Player* jugador = new Player();
@@ -46,7 +45,7 @@ Game::Game()
 
     //agregamos modelo a jugador
 	int initialOffset = 40;
-	bricks = 55;
+	bricks = 12;
 	for(int i = 0; i < bricks ; i++){
 		int row = i/rowQuantity; 
 		int offset = i%rowQuantity;
@@ -74,7 +73,6 @@ void Game::restart(){
 	world->addPlayer(jugador);
 	std::cout<<"Creando ladrillos y añadiendolos al mundo...\n";
 	int initialOffset = 40;
-	bricks = 55;
 	for(int i = 0; i < bricks ; i++){
 		int row = i/rowQuantity; 
 		int offset = i%rowQuantity;
@@ -92,11 +90,11 @@ void Game::loop(){
 	while(device->run())
 	{
 		//TODO: Pintar las vidas
-
 		driver->beginScene(true, true, SColor(255,200,101,100));
 
-        Game::draw();
         Game::update();
+
+        Game::draw();
 
 		driver->endScene();
 
@@ -104,20 +102,49 @@ void Game::loop(){
 }
 void Game::update(){
 	if(started){
-		if(!world->getLoss()){
+		if(!world->getLoss()&&!world->getWin()){
 			world->Update();
 			int vidas = world->getVidas();
+			switch (vidas) {
+				case 0:
+					textoVidas->promptImage("Materials/0.png");
+					break;
+				case 1:
+					textoVidas->promptImage("Materials/1.png");
+					break;
+				case 2:
+					textoVidas->promptImage("Materials/2.png");
+					break;
+				case 3:
+					textoVidas->promptImage("Materials/3.png");
+					break;
+
+			}
 			//textoVidas->promptImage(std::to_string(vidas));
 		}
 		else{
-			//std::cout<<"YOU LOST \n";
-			lostText->promptImage ("Materials/perdido.png");
-			if(receiver->IsKeyDown(irr::KEY_KEY_Z)){
-				restart();
-				lostText->promptImage ("Materials/nada.png");
+			bool brestart = false;
+			if(world->getLoss()){
+				lostText->promptImage ("Materials/perdido.png");
+				if(receiver->IsKeyDown(irr::KEY_KEY_Z)){
+					lostText->promptImage ("Materials/nada.png");
+					brestart = true;
+				}
 			}
-			//TODO: Poner aqui como una pantalla en verde que ponga "Press Z to restart" 
+			else if(world->getWin()){
+				lostText->promptImage ("Materials/ganador.png");
+				if(receiver->IsKeyDown(irr::KEY_KEY_Z)){
+					bricks+=10;
+					world->faster();
+					lostText->promptImage ("Materials/nada.png");
+					brestart = true;
+				}
+			}
+			if(brestart){
+			restart();	
+			}		
 		}
+		
 	}
 		else{
 			lostText->promptImage ("Materials/empezar.png");

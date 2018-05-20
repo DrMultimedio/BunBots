@@ -18,7 +18,7 @@ class GUIimg {
 
     public:
         GUIimg(irr::gui::IGUIEnvironment* gui,irr::video::IVideoDriver* driveraux, irr::io::path path);
-        GUIimg(irr::gui::IGUIEnvironment* gui,irr::video::IVideoDriver* driveraux, int a, int b, int c, int d, irr::io::path path);
+        GUIimg(irr::gui::IGUIEnvironment* gui,irr::video::IVideoDriver* driveraux, int a, int b, int c, int d);
         void promptImage(irr::io::path path);
         GUIimg() = delete;
 

@@ -35,6 +35,11 @@ void Bola::update(){
     this->node->setPosition(pos);
 
 }
+void Bola::faster(){
+    acceleration.X += 0.0001f;
+    acceleration.Y += 0.001f;
+
+}
 void Bola::restart(){
     if(lifes>0){
         pos.X = 0.0f;
@@ -50,14 +55,15 @@ void Bola::restart(){
 }
 void Bola::crash(){
     speed.Z = -speed.Z;
-    acceleration.Z = -acceleration.Z; //sin esta linea hace un efecto gravitatorio :3
+    //acceleration.Z = -acceleration.Z; //sin esta linea hace un efecto gravitatorio :3
 
 }
 Bola::Bola(){
     speed.X = 0.6f;
     speed.Z = 0.95f;
-    acceleration.X = 0.001f;
-    acceleration.Y = 0.001f;
+    acceleration.X = 0.0005f;
+    acceleration.Y = 0.005f;
+    //acceleration.Z = 0.01f;
 
 }
 bool Bola::getLoss(){
